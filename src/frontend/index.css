@@ -1,0 +1,347 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Self-hosted fonts ─────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "General Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("/assets/fonts/JetBrainsMono[wght].woff2") format("woff2");
+}
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Light mode – clean off-white with rich teal accent */
+    --background: 0.97 0.005 240;
+    --foreground: 0.14 0.02 265;
+    --card: 1 0 0;
+    --card-foreground: 0.14 0.02 265;
+    --popover: 1 0 0;
+    --popover-foreground: 0.14 0.02 265;
+    --primary: 0.62 0.19 205;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.93 0.015 240;
+    --secondary-foreground: 0.14 0.02 265;
+    --muted: 0.93 0.01 240;
+    --muted-foreground: 0.5 0.025 260;
+    --accent: 0.88 0.06 195;
+    --accent-foreground: 0.14 0.02 265;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.88 0.01 240;
+    --input: 0.88 0.01 240;
+    --ring: 0.62 0.19 205;
+
+    /* Chart colors */
+    --chart-1: 0.62 0.19 205;
+    --chart-2: 0.72 0.17 155;
+    --chart-3: 0.55 0.18 280;
+    --chart-4: 0.75 0.15 55;
+    --chart-5: 0.65 0.2 25;
+
+    /* Sidebar */
+    --sidebar: 0.97 0.005 240;
+    --sidebar-foreground: 0.14 0.02 265;
+    --sidebar-primary: 0.62 0.19 205;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.88 0.06 195;
+    --sidebar-accent-foreground: 0.14 0.02 265;
+    --sidebar-border: 0.88 0.01 240;
+    --sidebar-ring: 0.62 0.19 205;
+
+    /* Custom portfolio tokens */
+    --glow: 0.62 0.19 205;
+    --hero-gradient-start: 0.97 0.005 240;
+    --hero-gradient-end: 0.93 0.03 210;
+    --grid-line: 0.88 0.015 240;
+    --tag-bg: 0.88 0.06 195;
+    --tag-text: 0.14 0.02 265;
+  }
+
+  .dark {
+    --background: 0.11 0.015 265;
+    --foreground: 0.93 0.01 230;
+    --card: 0.15 0.018 265;
+    --card-foreground: 0.93 0.01 230;
+    --popover: 0.17 0.018 265;
+    --popover-foreground: 0.93 0.01 230;
+    --primary: 0.72 0.2 195;
+    --primary-foreground: 0.1 0.02 265;
+    --secondary: 0.19 0.02 265;
+    --secondary-foreground: 0.93 0.01 230;
+    --muted: 0.19 0.02 265;
+    --muted-foreground: 0.58 0.02 255;
+    --accent: 0.23 0.04 205;
+    --accent-foreground: 0.72 0.2 195;
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.985 0 0;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 12%;
+    --ring: 0.72 0.2 195;
+
+    /* Chart colors */
+    --chart-1: 0.72 0.2 195;
+    --chart-2: 0.72 0.17 155;
+    --chart-3: 0.6 0.18 280;
+    --chart-4: 0.78 0.17 60;
+    --chart-5: 0.7 0.21 25;
+
+    /* Sidebar */
+    --sidebar: 0.13 0.016 265;
+    --sidebar-foreground: 0.93 0.01 230;
+    --sidebar-primary: 0.72 0.2 195;
+    --sidebar-primary-foreground: 0.1 0.02 265;
+    --sidebar-accent: 0.19 0.02 265;
+    --sidebar-accent-foreground: 0.72 0.2 195;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.72 0.2 195;
+
+    /* Custom portfolio tokens */
+    --glow: 0.72 0.2 195;
+    --hero-gradient-start: 0.11 0.015 265;
+    --hero-gradient-end: 0.14 0.03 235;
+    --grid-line: 1 0 0 / 5%;
+    --tag-bg: 0.23 0.04 205;
+    --tag-text: 0.72 0.2 195;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: oklch(var(--primary) / 0.25);
+    color: oklch(var(--foreground));
+  }
+}
+
+/* ── Portfolio-specific utilities ──────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+
+  .font-sans {
+    font-family: "General Sans", system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 40px oklch(var(--glow) / 0.5);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 0 1px oklch(var(--primary) / 0.3), 0 0 20px oklch(var(--primary) / 0.1);
+  }
+
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 40px oklch(var(--primary) / 0.12),
+      0 8px 16px oklch(0 0 0 / 0.12);
+  }
+
+  .section-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  .section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(oklch(var(--grid-line)) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(var(--grid-line)) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--primary)),
+      oklch(0.82 0.15 165)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .skill-tag {
+    background: oklch(var(--tag-bg));
+    color: oklch(var(--tag-text));
+    border: 1px solid oklch(var(--primary) / 0.2);
+  }
+}
+
+/* ── Keyframe animations ───────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px oklch(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 24px oklch(var(--primary) / 0.6); }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@layer utilities {
+  .animate-fadeInUp {
+    animation: fadeInUp 0.7s ease both;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease both;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.6s ease both;
+  }
+
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-800 { animation-delay: 800ms; }
+}
+
+/* ── Contribution heatmap ──────────────────────────────────────── */
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(52, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.heatmap-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--primary) / 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--primary) / 0.7);
+}
+
+/* ── Mobile menu ───────────────────────────────────────────────── */
+.mobile-menu-enter {
+  animation: fadeInUp 0.2s ease both;
+}
